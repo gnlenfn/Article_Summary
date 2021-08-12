@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <h1>{{ article.title }}</h1>
+    <h2 class="border-bottom py-2">{{ article.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ article.summary }}</div>
+            <br>
+
+            <div>원문 기사: <a href="{{ article.url }}">{{ article.url }}</a></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ article.create_date|datetime }}
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+{% endblock %}

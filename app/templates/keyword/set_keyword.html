@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <form method="post" class="post-form">
+        {{ form.csrf_token }}
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <label for="word">검색 키워드</label>
+            <input type="text" class="form-control" name="word" id="word"
+                   value="{{ form.word.data or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="nums">기사 수</label>
+            <input type="int" class="form-control" name="nums" id="nums"
+                   value="{{ form.nums.data or 5 }}">
+        </div>
+        <button type="submit" class="btn btn-primary">추가하기</button>
+    </form>
+    <br>
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>번호</th>
+            <th>키워드</th>
+            <th>추가한 날짜</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if keyword_list %}
+        {% for keyword in keyword_list %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{ keyword.word }}</td>
+            <td>{{ keyword.create_date|datetime }}</td>
+            <td>
+                <a href="{{ url_for('query.delete', keyword_id=keyword.id) }}" class="delete btn btn-sm btn-outline-secondary"
+        data-uri="{{ url_for('query.delete', keyword_id=keyword.id) }}">삭제</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">키워드가 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".delete").on('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = $(this).data('uri');
+        }
+    });
+});
+</script>
+{% endblock %}
