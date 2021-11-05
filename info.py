@@ -1,11 +1,11 @@
 import psycopg2 
 
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://wxmedoqx:hihfM0QF3AtbKXRC8cOy_Nc5yVxrL_1j@arjuna.db.elephantsql.com/wxmedoqx'
-host = 'arjuna.db.elephantsql.com'
-user = 'wxmedoqx'
-password = 'hihfM0QF3AtbKXRC8cOy_Nc5yVxrL_1j'
-database = 'wxmedoqx'
+SQLALCHEMY_DATABASE_URI = '##'
+host = '##'
+user = '##'
+password = '##'
+database = '##'
 
 connection = psycopg2.connect(
     host=host,
